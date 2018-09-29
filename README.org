@@ -4,23 +4,19 @@ Picolisp XHTML generation.
 ** Single Element
 #+BEGIN_SRC picolisp
   (<. 'h1 '((id . "title")) '> "Header")
+#-> <h1 id="title">Header</h1>
 #+END_SRC
-#+RESULTS:
-: <h1 id="title">Header</h1>
 ** Self-closing Element
 #+BEGIN_SRC picolisp
   (<. 'br NIL '/>)
+#-> <br />
 #+END_SRC
-#+RESULTS:
-: <br />
 ** Full Page
 #+BEGIN_SRC picolisp
-  (load "xhtml.l")
   (<. 'html NIL '>
      (<. 'head NIL '>
         (<. 'title NIL '> "Page title") )
      (<. 'body NIL '>
         (<. 'h1 '((id . "title")) '> "Hello!") ) )
+#-> <html><head><title>Page title</title></head><body><h1 id="title">Hello!</h1></body></html>
 #+END_SRC
-#+RESULTS:
-: <html><head><title>Page title</title></head><body><h1 id="title">Hello!</h1></body></html>
