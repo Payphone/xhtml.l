@@ -4,9 +4,10 @@
       (for A Attr
          (prin " " (car A) '= '\" (cdr A) '\") ) )
    (prin '>)
-   (if (atom (car Prg))
-      (prin (car Prg))
-      (eval Prg) )
+   (for H Prg
+      (if (atom H)
+         (prin H) 
+         (eval H) ) )
    (prin '</ Tag '>) )
 
 # Self-closing tag, Ex. <br />
@@ -14,10 +15,18 @@
    (prin '< Tag) 
    (and Attr
       (for A Attr
-         (prin " " (car A) '= (cdr A)) ) )
+         (prin " " (car A) '= '\" (cdr A) '\") ) )
    (prin " " '/>) ) 
 
-(de <. (Tag Attr Close . Prg)
-   (casq Close
-      (/> (sTag Tag Attr))
-      (> (tag Tag Attr Prg)) ) )
+(de <. Args #(Tag Attr Close Prg)
+   (casq (caddr Args)
+      (/> (sTag (car Args) (eval (cadr Args))))
+      (> (tag (car Args) (eval (cadr Args)) (cdddr Args))) ) )
+
+(de comment Args NIL)
+
+(<. html NIL >
+   (<. head NIL >
+      (<. title NIL > "Page title") )
+   (<. body NIL >
+      (<. h1 '((id . "title")) > "Hello!") ) )  
