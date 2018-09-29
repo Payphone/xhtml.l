@@ -22,11 +22,3 @@
    (casq (caddr Args)
       (/> (sTag (car Args) (eval (cadr Args))))
       (> (tag (car Args) (eval (cadr Args)) (cdddr Args))) ) )
-
-(de comment Args NIL)
-
-(<. html NIL >
-   (<. head NIL >
-      (<. title NIL > "Page title") )
-   (<. body NIL >
-      (<. h1 '((id . "title")) > "Hello!") ) )  
