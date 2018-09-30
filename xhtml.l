@@ -6,17 +6,17 @@
    (prin '>)
    (for H Prg
       (if (atom H)
-         (prin H) 
+         (prin (eval H))
          (eval H) ) )
    (prin '</ Tag '>) )
 
 # Self-closing tag, Ex. <br />
 (de sTag (Tag Attr)
-   (prin '< Tag) 
+   (prin '< Tag)
    (and Attr
       (for A Attr
          (prin " " (car A) '= '\" (cdr A) '\") ) )
-   (prin " " '/>) ) 
+   (prin " " '/>) )
 
 (de <. Args #(Tag Attr Close Prg)
    (casq (caddr Args)
